@@ -1,0 +1,38 @@
+<html>
+<body>
+<h1>Code</h1>
+<pre>
+from numpy import exp, sin, pi, linspace
+f = lambda x, t: exp(-(x - 3*t)**2) * sin(3*pi * (x - t))
+x = linspace(-5, 5, 1000)
+t = linspace(-1, 1, 200)
+
+def animate(f, x, t, axis):
+    import matplotlib as mpl
+    from matplotlib.animation import FuncAnimation
+
+    fig = plt.figure()
+    ln, = plt.plot([], [])
+    plt.axis(axis)
+
+    def draw(t):
+        y = f(x, t)
+        ln.set_data(x, y)
+        return ln,
+
+    anim = FuncAnimation(fig, draw, t, interval=20, blit=True)
+    mpl.rc('animation', html='html5')
+
+    return anim
+
+animate(f, x, t, [-5, 5, -1.2, 1.2])
+</pre>
+<h1>Plots</h1>
+<h2>Using t=-1, t=0, t=1</h2>
+<img src="../stuff/wavepacket1.png" />
+<img src="../stuff/wavepacket2.png" />
+<img src="../stuff/wavepacket3.png" />
+<h1>Animation</h1>
+<img src="../stuff/wavepacket.gif" />
+</body>
+</html>
